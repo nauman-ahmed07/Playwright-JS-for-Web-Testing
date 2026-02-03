@@ -19,5 +19,5 @@ test('Browser Context Playwright test',async ({browser})=>
     await page.locator(".card-body b").first().waitFor();
     const allTitles = await cardTitles.allTextContents();
     console.log(allTitles);
-//
+//test2
 });
