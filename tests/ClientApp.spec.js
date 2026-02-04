@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('Client App Login', async ({ browser }) => {
+test('Client App Login', async ({ page }) => {
 
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -11,9 +11,13 @@ test('Client App Login', async ({ browser }) => {
 
   await page.locator("#userEmail").fill("nauman.ahmed07.na@gmail.com");
   await page.locator("#userPassword").fill("Password123");
-  await page.locator("#login").click();
+  await Promise.all(
+    [
+    page.waitForLoadState('networkidle'),
+    page.locator('#login').click(),
+    ]);
 
-  await page.locator(".card-body b").first().waitFor();
+  await page.locator(".card-body b").first().waitFor({ timeout: 15000 });
 
   const products = page.locator(".card-body");
   const count = await products.count();
