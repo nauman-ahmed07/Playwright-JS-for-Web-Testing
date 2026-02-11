@@ -26,7 +26,10 @@ test('Browser Context Playwright test',async ({browser})=>
 test('UI Controls',async ({page})=>
 {
   
-    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");  
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/", {
+  timeout: 60000,
+  waitUntil: 'domcontentloaded'
+});
     const userEmail = page.locator('#userEmail');
     const login = page.locator('#login');
     const blinkingText = page.locator(".blinkingText");
